@@ -37,7 +37,7 @@ int main() {
             cout << ", " << v[i];
         }
     }
-    cout << ">\n";
+    cout << "\n";
 
 
     return 0;
