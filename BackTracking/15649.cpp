@@ -30,7 +30,6 @@ void func(int k) {
 int main() {
 
     cin >> n >> m;
-
     func(0);
 
     return 0;
