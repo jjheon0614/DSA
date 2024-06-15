@@ -1,84 +1,41 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
 
-int main() {
-
-    long long n, m;
-    cin >> n >> m;
-
-    vector<long long> v(n);
-    for (int i = 0; i < n; i++) {
-        cin >> v[i];
-    }
-    sort(v.begin(), v.end(), greater<int>());
-    int low = 1;
-    int high = v[0];
-    int max;
-
-
-    while (low <= high) {
-        int sum = 0;
-        int mid = (low + high) / 2;
-
-        for (int i = 0; i < n; i++) {
-            sum += (int)(v[i] / mid);
-        }
-
-        if (sum >= m) {
-            if (max < mid) max = mid;
-            low = mid + 1;
-        } else {
-            high = mid - 1;
-        }
-    }
-
-    cout << max << "\n";
-
-    return 0;
-}
-
-
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
+unsigned int ans;
+unsigned int N,K;
+unsigned int list[10000];
 
 int main() {
+    cin >> K >> N;
+    unsigned int maxi = 0;
 
-    int n, m;
-    cin >> n >> m;
-
-    vector<int> v(n);
-    for (int i = 0; i < n; i++) {
-        cin >> v[i];
+    for (int i = 0; i < K; i++) {
+        cin >> list[i];
+        maxi = max(maxi, list[i]);
     }
-    sort(v.begin(), v.end(), greater<int>());
-    int low = 0;
-    int high = v[0];
-    int max;
 
+    unsigned int left = 1, right = maxi, mid;
 
-    while (low <= high) {
-        int sum = 0;
-        int mid = (low + high) / 2;
+    while (left <= right) {
+        mid = (left + right) / 2;
 
-        for (int i = 0; i < n; i++) {
-            sum += v[i] / mid;
+        int now = 0;
+
+        for (int i = 0; i < K; i++) {
+            now += list[i] / mid;
         }
 
-        if (sum >= m) {
-            max = mid;
-            low = mid + 1;
+        if (now >= N) {
+            left = mid + 1;
+            ans = max(ans, mid);
         } else {
-            high = mid - 1;
+            right = mid - 1;
         }
     }
 
-    cout << max << "\n";
+    cout << ans << "\n";
 
     return 0;
 }
