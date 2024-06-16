@@ -3,10 +3,11 @@
 
 using namespace std;
 
+int tmp, ans;
+int sign = 1;
+
 int main() {
-    int tmp, ans;
-    int sign = 1;
-    
+
     string str;
     cin >> str;
 
@@ -19,7 +20,7 @@ int main() {
             tmp = 0;
         } else {
             tmp *= 10;
-            ans += tmp - '0';
+            tmp += c - '0';
         }
     }
 
