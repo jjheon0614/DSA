@@ -1,8 +1,8 @@
 #include <iostream>
-#include <queue>
 #include <stack>
-#include <vector>
+#include <queue>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -21,7 +21,7 @@ void dfs1() {
         vis[cur] = true;
         cout << cur << " ";
 
-        for (int i = 0 ; i < adj[cur].size(); i++) {
+        for (int i = 0; i < adj[cur].size(); i++) {
             int nxt = adj[cur][adj[cur].size() - 1 - i];
             if (vis[nxt]) continue;
             s.push(nxt);
@@ -29,10 +29,11 @@ void dfs1() {
     }
 }
 
+
 void dfs2(int cur) {
     vis[cur] = true;
     cout << cur << " ";
-    for (auto nxt : adj[cur]) {
+    for (auto nxt: adj[cur]) {
         if (vis[nxt]) continue;
         dfs2(nxt);
     }
@@ -46,6 +47,7 @@ void bfs() {
         int cur = q.front();
         cout << cur << " ";
         q.pop();
+
         for (auto nxt: adj[cur]) {
             if (vis[nxt]) continue;
             q.push(nxt);
@@ -59,6 +61,7 @@ int main() {
     while (m--) {
         int u, v;
         cin >> u >> v;
+
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
@@ -71,6 +74,7 @@ int main() {
     cout << "\n";
     fill(vis + 1, vis + n + 1, false);
     bfs();
+
 
     return 0;
 }

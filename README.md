@@ -7,3 +7,4 @@
 ## - [Back-Tracking](./BackTracking/BackTracking.md)
 ## - [Binary Search](./BinarySearch/BinarySearch.md)
 ## - [Greedy](./Greedy/Greedy.md)
+## - [Graph](./Graph/Graph.md)
