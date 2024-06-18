@@ -1,6 +1,7 @@
 #include <iostream>
-#include <vector>
 #include <queue>
+#include <vector>
+
 using namespace std;
 
 int k, v, e;
@@ -8,9 +9,10 @@ int gr[20002];
 vector<int> adj[20002];
 
 bool solve() {
+
     fill(gr, gr + v + 1, -1);
 
-    for (int i = 1; i<= v; i++) {
+    for (int i = 1; i <= v; i++) {
         if (gr[i] != -1) continue;
 
         queue<int> q;
@@ -20,7 +22,7 @@ bool solve() {
         while (!q.empty()) {
             int cur = q.front();
             q.pop();
-            for (int nxt: adj[cur]) {
+            for (int nxt : adj[cur]) {
                 if (gr[nxt] != -1) {
                     if (gr[nxt] == gr[cur]) return false;
                     else continue;
@@ -34,9 +36,10 @@ bool solve() {
     return true;
 }
 
-int main() {
 
+int main() {
     cin >> k;
+
     while (k--) {
         cin >> v >> e;
         for (int i = 1; i <= v; i++) {
@@ -49,9 +52,11 @@ int main() {
             adj[i].push_back(j);
             adj[j].push_back(i);
         }
+
         if (solve()) cout << "YES\n";
         else cout << "NO\n";
     }
+
 
     return 0;
 }
