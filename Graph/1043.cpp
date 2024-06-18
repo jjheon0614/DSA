@@ -9,7 +9,6 @@ vector<int> pt[52];
 vector<int> adj[52];
 bool tr[52];
 
-
 void bfs() {
     queue<int> q;
     for (int i = 1; i <= n; i++) {
@@ -22,13 +21,11 @@ void bfs() {
 
         for (int nxt: adj[cur]) {
             if (tr[nxt]) continue;
-
             tr[nxt] = 1;
             q.push(nxt);
         }
     }
 }
-
 
 int main() {
 
