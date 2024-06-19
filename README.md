@@ -8,3 +8,5 @@
 ## - [Binary Search](./BinarySearch/BinarySearch.md)
 ## - [Greedy](./Greedy/Greedy.md)
 ## - [Graph](./Graph/Graph.md)
+## - [TwoPointer](./TwoPointer/TwoPointer.md)
+## - [Tree](./Tree/Tree.md)

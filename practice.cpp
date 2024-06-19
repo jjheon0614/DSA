@@ -1,71 +1,56 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
-#include <queue>
 
 using namespace std;
 
-int n, m, t;
-vector<int> pt[52];
-vector<int> adj[52];
-bool tr[52];
-
-
-void bfs() {
-    queue<int> q;
-    for (int i = 1; i <= n; i++) {
-        if (tr[i]) q.push(i);
+const int MXN = 510;
+vector<int> adj[MXN];
+bool vis[MXN], isTree;
+int n, m, u, v, tc, trees;
+void dfs(int cur, int prev) {
+  for (int nxt : adj[cur]) {
+    if (nxt == prev) // next가 부모(prev)일 경우 건너뜀
+      continue;
+    if (vis[nxt]) { // 트리일 경우 자식은 반드시 이전에 방문한 적이 없었어야 하고, 이전에 방문을 했다면 현재 보고 있는 connected component가 트리가 아님을 의미
+      isTree = false;
+      continue;
     }
-
-    while (!q.empty()) {
-        int cur = q.front();
-        q.pop();
-
-        for (int nxt: adj[cur]) {
-            if (tr[nxt]) continue;
-
-            tr[nxt] = 1;
-            q.push(nxt);
-        }
-    }
+    vis[nxt] = true;
+    dfs(nxt, cur);
+  }
 }
+int main(void) {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
 
+  while (1) {
+    cin >> n >> m;
+    if (!n && !m) break;
 
-int main() {
+    fill(vis, vis + n + 1, 0);
+    for (int i = 1; i <= n; i++)
+      adj[i].clear();
+    trees = 0;
 
-    cin >> n >> m >> t;
-    while (t--) {
-        int x;
-        cin >> x;
-        tr[x] = 1;
+    while (m--) {
+      cin >> u >> v;
+      adj[u].push_back(v);
+      adj[v].push_back(u);
     }
-
-    for (int i = 0; i < m; i++) {
-        int no;
-        cin >> no;
-
-        int prv, nxt;
-        cin >> prv;
-        pt[i].push_back(prv);
-
-        while (--no) {
-            cin >> nxt;
-            pt[i].push_back(nxt);
-            adj[nxt].push_back(prv);
-            adj[prv].push_back(nxt);
-            swap(prv, nxt);
-        }
+    for (int i = 1; i <= n; i++) {
+      if (vis[i]) continue;
+      vis[i] = true;
+      isTree = true;
+      dfs(i, -1);
+      trees += isTree;
     }
-
-    bfs();
-
-    int cnt = 0;
-    for (int i = 0; i < m; i++) {
-        bool known = 0;
-        for (int p : pt[i]) if (tr[p]) known = 1;
-        if (!known) cnt++;
-    }
-
-    cout << cnt << "\n";
-
-    return 0;
+    cout << "Case " << ++tc << ": ";
+    if (!trees)
+      cout << "No trees." << '\n';
+    else if (trees == 1)
+      cout << "There is one tree." << '\n';
+    else
+      cout << "A forest of " << trees << " trees." << '\n';
+  }
 }
