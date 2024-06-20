@@ -10,3 +10,4 @@
 ## - [Graph](./Graph/Graph.md)
 ## - [TwoPointer](./TwoPointer/TwoPointer.md)
 ## - [Tree](./Tree/Tree.md)
+## - [Priority_queue](./priority_queue/priority_queue.md)
