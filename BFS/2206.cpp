@@ -7,10 +7,11 @@ using namespace std;
 
 int board[1001][1001];
 int dist[1001][1001][2];
-int n, m;
 
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, -1, 0, 1};
+int n, m;
+
 
 int bfs() {
     for (int i = 0; i < n; i++) {
@@ -26,19 +27,19 @@ int bfs() {
     while (!q.empty()) {
         int x, y, broken;
         tie(x, y, broken) = q.front();
-        if (x == n - 1 && y == n - 1) return dist[x][y][broken];
+        if (x == n - 1 && y == m - 1) return dist[x][y][broken];
         q.pop();
 
         int nextdist = dist[x][y][broken] + 1;
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
+        for (int dir = 0; dir < 4; dir++) {
+            int nx = x + dx[dir];
+            int ny = y + dy[dir];
 
             if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
             if (board[nx][ny] == 0 && dist[nx][ny][broken] == -1) {
                 dist[nx][ny][broken] = nextdist;
-                q.push({nx, ny, broken}):
-            } 
+                q.push({nx, ny, broken});
+            }
 
             if (!broken && board[nx][ny] == 1 && dist[nx][ny][1] == -1) {
                 dist[nx][ny][1] = nextdist;
@@ -50,7 +51,9 @@ int bfs() {
     return -1;
 }
 
+
 int main() {
+
     cin >> n >> m;
 
     for (int i = 0; i < n; i++) {
