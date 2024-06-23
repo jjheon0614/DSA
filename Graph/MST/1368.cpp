@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <tuple>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -8,16 +8,17 @@ using namespace std;
 vector<int> p(303, -1);
 
 int find(int x) {
-    if(p[x] < 0) return x;
+    if (p[x] < 0) return x;
     return p[x] = find(p[x]);
 }
 
 bool is_diff_group(int u, int v) {
     u = find(u);
     v = find(v);
-
     if (u == v) return 0;
+
     if (p[u] == p[v]) p[u]--;
+
     if (p[u] < p[v]) p[v] = u;
     else p[u] = v;
 
@@ -25,7 +26,7 @@ bool is_diff_group(int u, int v) {
 }
 
 int v, e;
-tuple<int, int ,int> edge[100005];
+tuple<int, int, int> edge[100005];
 
 int main() {
 
@@ -48,7 +49,6 @@ int main() {
             edge[e++] = {cost, i, j};
         }
     }
-
     v++;
     sort(edge, edge + e);
     int cnt = 0;
