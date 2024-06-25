@@ -1,6 +1,5 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 
 using namespace std;
 
@@ -15,7 +14,7 @@ int main() {
     }
 
     sort(arr, arr + n);
-    
+
     int total = 0;
     int ans = 0;
     for (int i = 0; i < n; i++) {
