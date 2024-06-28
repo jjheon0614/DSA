@@ -21,6 +21,7 @@ int main() {
         ans++;
         t = s[i].first;
     }
+    
 
     cout << ans << "\n";
 
