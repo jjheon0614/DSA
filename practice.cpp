@@ -1,36 +1,26 @@
 #include <iostream>
-#include <queue>
-#include <vector>
-#include <algorithm>
 
 using namespace std;
 
-int n;
-vector<pair<int, int>> v;
-priority_queue<int, vector<int>, greater<int>> pq;
-
 int main() {
-
+    int n;
     cin >> n;
-    for (int i = 0; i < n; i++) {
-        int start, end;
-        cin >> start >> end;
-        v.push_back({start, end});
-    }
 
-    sort(v.begin(), v.end());
+    int max = n / 5;
 
-    pq.push(v[0].second);
-    for (int i = 1; i < v.size(); i++) {
-        if (v[i].first >= pq.top()) {
-            pq.pop();
-            pq.push(v[i].second);
-        } else {
-            pq.push(v[i].second);
+    int result = -1;
+    for (int i = max; i >= 0; i--) {
+        int copy = n;
+
+        int rest = copy - i * 5;
+
+        if (rest % 3 == 0) {
+            result = i + rest / 3;
+            break;
         }
     }
 
-    cout << pq.size();
+    cout << result << "\n";
 
     return 0;
 }
