@@ -1,5 +1,6 @@
 # DSA
 밀라 알고리즘 스터디 6기
+2024.06 - 2024.07
 
 ## - [Stack&Queue](./Stack&Queue/Stack&Queue.md)
 ## - [BFS](./BFS/BFS.md)
