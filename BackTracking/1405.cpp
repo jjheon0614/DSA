@@ -14,7 +14,7 @@ long double track(int y, int x, long double p, int cnt) {
     for (int i = 0; i < 4; i++) {
         if (visited[y + dy[i]][x + dx[i]]) continue;
 
-        visited[y + dy[i]][x + dx[i]]++;
+        visited[y+ dy[i]][x + dx[i]]++;
         sum += track(y + dy[i], x + dx[i], p * w[i], cnt + 1);
         visited[y + dy[i]][x + dx[i]]--;
     }
@@ -28,9 +28,11 @@ int main() {
 
     for (int i = 0; i < 4; i++) w[i] /= 100;
 
+
     visited[15][15]++;
     cout.precision(10);
     cout << track(15, 15, 1, 0) << "\n";
+
 
     return 0;
 }
