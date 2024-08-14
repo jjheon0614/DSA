@@ -7,8 +7,9 @@ int visited[30][30];
 int dy[4] = {0, 0, 1, -1};
 int dx[4] = {1, -1, 0, 0};
 
-long double track(int y, int x, long double p, int cnt) {
+long double track(int y , int x, long double p, int cnt) {
     if (cnt == N || p == 0) return p;
+
     long double sum = 0;
 
     for (int i = 0; i < 4; i++) {
