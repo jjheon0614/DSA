@@ -13,12 +13,7 @@ int main () {
         dp[1][i] = 1;
     }
 
-    
-    for (int i = 9; i >= 0; i--) {
-        dp[2][i] = 10 - i;
-    }
-
-    for (int i = 3; i <= n; i++) {
+    for (int i = 2; i <= n; i++) {
         for (int j = 0; j <= 9; j++) {
             dp[i][j] = 0;
             for (int k = j; k <= 9; k++) {
