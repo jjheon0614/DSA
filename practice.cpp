@@ -29,9 +29,9 @@ int main() {
 
     for (int i = 0; i < 4; i++) w[i] /= 100;
 
-    // visited[15][15]++;
-    // cout.precision(10);
-    // cout << track(15, 15, 1, 0) << "\n";
+    visited[15][15]++;
+    cout.precision(10);
+    cout << track(15, 15, 1, 0) << "\n";
 
     return 0;
 }
