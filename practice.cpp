@@ -1,37 +1,74 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-long double N, w[4];
-int visited[30][30];
-int dy[4] = {0, 0, 1, -1};
-int dx[4] = {1, -1, 0, 0};
+int arr[6][3], goal[6][3], ans[4];
+vector<pair<int, int>> v;
+bool res = true;
 
-long double track(int y , int x, long double p, int cnt) {
-    if (cnt == N || p == 0) return p;
-
-    long double sum = 0;
-
-    for (int i = 0; i < 4; i++) {
-        if (visited[y + dy[i]][x + dx[i]]) continue;
-
-        visited[y + dy[i]][x + dx[i]]++;
-        sum += track(y + dy[i], x + dx[i], p * w[i], cnt + 1);
-        visited[y + dy[i]][x + dx[i]]--;
+void backTracking(int depth) {
+    if (depth == v.size()) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (arr[i][j] != goal[i][j]) return;
+            }
+        }
     }
 
-    return sum;
+    if (depth == v.size()) {
+        res = false;
+        return;
+    }
+
+    int a = v[depth].first, b = v[depth].second;
+
+    arr[a][0]++;
+    arr[b][2]++;
+    backTracking(depth + 1);
+    arr[a][0]--;
+    arr[b][2]--;
+
+    arr[a][1]++;
+    arr[b][1]++;
+    backTracking(depth + 1);
+    arr[a][1]--;
+    arr[b][1]--;
+
+
+    arr[a][2]++;
+    arr[b][0]++;
+    backTracking(depth + 1);
+    arr[a][2]--;
+    arr[b][0]--;
 }
 
 int main() {
+    int cnt = 0;
+    for (int i = 0; i < 6; i++) {
+        for (int j = i + 1; j < 6; j++) v.push_back({i, j});
+    }
 
-    cin >> N >> w[0] >> w[1] >> w[2] >> w[3];
+    while (true) {
+        res = true;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                arr[i][j] = 0;
+                cin >> goal[i][j];
+            }
+        }
 
-    for (int i = 0; i < 4; i++) w[i] /= 100;
+        backTracking(0);
+        if (!res) ans[cnt] = 1;
+        else ans[cnt] = 0;
 
-    visited[15][15]++;
-    cout.precision(10);
-    cout << track(15, 15, 1, 0) << "\n";
+        cnt++;
+        if (cnt == 4) break;
+    }
+
+    for (int i = 0; i < 4; i++) {
+        cout << ans[i] << " ";
+    }
 
     return 0;
 }
