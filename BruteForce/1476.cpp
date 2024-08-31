@@ -15,9 +15,16 @@ int main() {
 
     int count = 1;
 
-    while (true) {
-
+    while(1){
+        
+        if((count - E) % 15 == 0 && (count - S) % 28==0 && (count - M) % 19 == 0){
+            break;
+        }
+        else count++;
+        
     }
+
+    cout << count << "\n";
 
     return 0;
 }
