@@ -29,7 +29,7 @@ int main() {
     for (int i = 0; i < n; i++) cin >> num[i];
     sort(num, num + n);
 
-    func(0 , 0);
+    func(0, 0);
 
     return 0;
 }
