@@ -1,33 +1,35 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
-int arr[10];
-int num[10];
-int n, m;
-
-void func(int k, int st){
-  if(k == m){
-    for(int i = 0; i < m; i++) cout << arr[i] << " ";
-    cout << "\n";
-    return;
-  }
-  int tmp = -1;
-  for(int i = st; i < n; i++){
-    if(num[i] != tmp){
-      arr[k] = num[i];
-      tmp = arr[k];
-      func(k+1, i);
-    }
-  }
-}
-
-int main(void) {
+int main() {
   ios::sync_with_stdio(0);
   cin.tie(0);
-  cin >> n >> m;
-  for(int i = 0; i < n; i++) cin >> num[i];
-  sort(num, num+n);
-  func(0, 0);
+  vector<pair<int, int>> events;
+
+  int n;
+  cin >> n;
+
+  while (n--) {
+    int l, r;
+    cin >> l >> r;
+
+    events.push_back({l, 1});
+    events.push_back({r, -1});
+  }
+
+  sort(events.begin(), events.end());
+  int cnt = 0;
+  int tot = 0;
+  int loc = -1e9;
+  for (auto event : events) {
+    if (cnt > 0) tot += (event.first - loc);
+    loc = event.first;
+    cnt += event.second;
+  }
+
+  cout << tot << "\n";
+  return 0;
 }
