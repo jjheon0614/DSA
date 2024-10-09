@@ -4,30 +4,43 @@
 
 using namespace std;
 
+vector<int> views;
+vector<int> likes;
+
 int main() {
-  vector<pair<int, int>> events;
 
   int n;
   cin >> n;
 
-  while (n--) {
-    int l, r;
-    cin >> l >> r;
-
-    events.push_back({l, 1});
-    events.push_back({r, -1});
+  for (int i = 0; i < n; i++) {
+	int num;
+	cin >> num;
+	views.push_back(num);
   }
 
-  sort(events.begin(), events.end());
-  int cnt = 0;
-  int tot = 0;
-  int loc = -1e9;
-  for (auto event : events) {
-    if (cnt > 0) tot += (event.first - loc);
-    loc = event.first;
-    cnt += event.second;
+  for (int i = 0; i < n; i++) {
+	int num;
+	cin >> num;
+	likes.push_back(num);
   }
 
-  cout << tot << "\n";
+	for (int i = 0; i < n; i++) {
+		cout << views[i] << " ";
+	}
+
+	sort(views.begin(), views.end());
+	sort(likes.begin(), likes.end());
+
+	int result = 0;
+
+	int view_index = 0;
+	int like_index = 0;
+
+	for (int i = 0; i < n; i++) {
+		
+	}
+
+
+
   return 0;
 }
