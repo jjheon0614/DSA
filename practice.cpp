@@ -28,6 +28,8 @@ int main() {
 		cout << views[i] << " ";
 	}
 
+	
+
 	sort(views.begin(), views.end());
 	sort(likes.begin(), likes.end());
 
@@ -37,7 +39,7 @@ int main() {
 	int like_index = 0;
 
 	for (int i = 0; i < n; i++) {
-		
+
 	}
 
 
