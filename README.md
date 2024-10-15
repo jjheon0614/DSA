@@ -14,3 +14,4 @@
 ## - [Priority_queue](./priority_queue/priority_queue.md)
 ## - [DP](./DP/DP.md)
 ## - [Brute force](./BruteForce/BruteForce.md)
+## - [String](./String/String.md)
