@@ -1,48 +1,37 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
 
 using namespace std;
 
-vector<int> views;
-vector<int> likes;
+int n;
+int maxNumber = 0;
+int dp[501][501] = {0, };
 
 int main() {
 
-  int n;
-  cin >> n;
+    cin >> n;
 
-  for (int i = 0; i < n; i++) {
-	int num;
-	cin >> num;
-	views.push_back(num);
-  }
-
-  for (int i = 0; i < n; i++) {
-	int num;
-	cin >> num;
-	likes.push_back(num);
-  }
-
-	for (int i = 0; i < n; i++) {
-		cout << views[i] << " ";
-	}
-
-	
-
-	sort(views.begin(), views.end());
-	sort(likes.begin(), likes.end());
-
-	int result = 0;
-
-	int view_index = 0;
-	int like_index = 0;
-
-	for (int i = 0; i < n; i++) {
-
-	}
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            cin >> dp[i][j];
+        }
+    }
 
 
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            if (j == 0) {
+                dp[i][j] = dp[i - 1][0] + dp[i][j];
+            } else if (i == j) {
+                dp[i][j] = dp[i - 1][j - 1] + dp[i][j];
+            } else {
+                dp[i][j] = max(dp[i - 1][j - 1] + dp[i][j], dp[i -1][j] + dp[i][j]);
+            }
 
-  return 0;
+            maxNumber = max(maxNumber, dp[i][j]);
+        }
+    }
+
+    cout << maxNumber << "\n";
+
+    return 0;
 }
