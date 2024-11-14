@@ -27,8 +27,6 @@ void triangle(int len, int row, int col) {
 }
 
 int main() {
-
-
     int n;
     cin >> n;
 

@@ -2,36 +2,48 @@
 
 using namespace std;
 
-int n;
-int maxNumber = 0;
-int dp[501][501] = {0, };
+char arr[3072][6143];
+
+void draw(int row, int col) {
+    arr[row][col] = '*';
+
+    arr[row + 1][col - 1] = '*';
+    arr[row + 1][col + 1] = '*';
+
+    for (int i = 0; i < 5; i++) {
+        arr[row + 2][col - 2 + i] = '*';
+    }
+}
+
+void triangle(int len, int row, int col) {
+    if (len == 3) {
+        draw(row, col);
+        return;
+    }
+
+    triangle(len / 2, row, col);
+    triangle(len / 2, row + len / 2, col - len / 2);
+    triangle(len / 2, row + len / 2, col + len / 2);
+}
 
 int main() {
-
+    int n;
     cin >> n;
 
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j <= i; j++) {
-            cin >> dp[i][j];
+        for (int j = 0; j < 2 * n - 1; j++) {
+            arr[i][j] = ' ';
         }
     }
 
+    triangle(n, 0, n - 1);
 
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j <= i; j++) {
-            if (j == 0) {
-                dp[i][j] = dp[i - 1][0] + dp[i][j];
-            } else if (i == j) {
-                dp[i][j] = dp[i - 1][j - 1] + dp[i][j];
-            } else {
-                dp[i][j] = max(dp[i - 1][j - 1] + dp[i][j], dp[i -1][j] + dp[i][j]);
-            }
-
-            maxNumber = max(maxNumber, dp[i][j]);
+        for (int j = 0; j < 2 * n - 1; j++) {
+            cout << arr[i][j];
         }
+        cout << "\n";
     }
-
-    cout << maxNumber << "\n";
 
     return 0;
 }
