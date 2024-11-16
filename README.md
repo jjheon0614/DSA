@@ -15,3 +15,4 @@
 ## - [DP](./DP/DP.md)
 ## - [Brute force](./BruteForce/BruteForce.md)
 ## - [String](./String/String.md)
+## - [Sorting](./Sorting/Sorting.md)
