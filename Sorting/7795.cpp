@@ -30,24 +30,20 @@ int main() {
         int result = 0;
 
         sort(arrA.begin(), arrA.end());
-        sort(arrB.begin(), arrB.end(), greater<int>());
+        sort(arrB.begin(), arrB.end());
 
         for (int j = 0; j < a; j++) {
-            if (arrA[j] > arrB[0]) {
-                result += arrB.size();
-            } else {
-                
-            }
             for (int k = 0; k < b; k++) {
                 if (arrA[j] > arrB[k]) {
                     result++;
+                } else {
+                    break;
                 }
             }
         }
 
         cout << result << "\n";
     }
-
 
     return 0;
 }
