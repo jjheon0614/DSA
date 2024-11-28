@@ -21,7 +21,6 @@ void triangle(int len, int row, int col) {
         return;
     }
 
-    
 
     triangle(len / 2, row, col);
     triangle(len / 2, row + len / 2, col - len / 2);
