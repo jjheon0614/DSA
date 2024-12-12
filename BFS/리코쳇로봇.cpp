@@ -76,7 +76,6 @@ int solution(vector<string> board) {
     }
     
     bfs(board);
-    
     if (answer == 2147000000) return -1;
     
     return answer;
