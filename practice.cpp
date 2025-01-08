@@ -1,84 +1,45 @@
 #include <string>
 #include <vector>
 #include <queue>
-#define MAX 100
 
 using namespace std;
 
-int n, m;
-int answer = 2147000000;
-pair<int, int> start;
-pair<int, int> goal;
-bool visited[MAX][MAX];
+vector<int> edge[100001];
 
-int dx[4] = {-1, 1, 0, 0};
-int dy[4] = {0, 0, -1, 1};
-
-
-
-void bfs(vector<string> &board) {
-    queue<pair<pair<int, int>, int>> q;
+vector<int> solution(int n, vector<vector<int>> roads, vector<int> sources, int destination) {
+    vector<int> answer(sources.size());
+    vector<int> costFromDestination(n + 1, -1);
     
-    q.push({{start.first, start.second}, 0});
-    visited[start.first][start.second] = true;
+    for (int i = 0; i < roads.size(); i++) {
+        int start = roads[i][0];
+        int dest = roads[i][1];
+        
+        edge[start].push_back(dest);
+        edge[dest].push_back(start);
+    }
+    
+    queue<pair<int, int>> q;
+    q.push({destination, 0});
+    costFromDestination[destination] = 0;
     
     while (!q.empty()) {
-        int cx = q.front().first.first;
-        int cy = q.front().first.second;
-        int cnt = q.front().second;
+        auto curPos = q.front().first;
+        auto curCount = q.front().second;
         q.pop();
         
-        if (cx == goal.first & cy == goal.second) {
-            answer = min(answer, cnt);
-        }
-        
-        for (int i = 0; i < 4; i++) {
-            int nx = cx + dx[i];
-            int ny = cy + dy[i];
+        for (int i = 0; i < edge[curPos].size(); i++) {
+            int nextPos = edge[curPos][i];
             
-            if ((nx < 0 || n <= nx || ny < 0 || m <= ny) || board[nx][ny] == 'D') continue;
-            
-            while (true) {
-                nx += dx[i];
-                ny += dy[i];
-                
-                if ((nx < 0 || n <= nx || ny < 0 || m <= ny) || board[nx][ny] == 'D') {
-                    nx -= dx[i];
-                    ny -= dy[i];
-                    
-                    break;
-                }
-            }
-            
-            if (visited[nx][ny]) continue;
-            
-            q.push({{nx, ny}, cnt + 1});
-            visited[nx][ny] = true;
-        }
-    }
-}
-
-int solution(vector<string> board) {
-    n = board.size();
-    m = board[0].size();
-    
-    int findCnt = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            if (findCnt == 2) break;
-            
-            if (board[i][j] == 'R') {
-                findCnt++;
-                start = {i, j};
-            } else if (board[i][j] == 'G') {
-                findCnt++;
-                goal = {i, j};
-            }
+            if (costFromDestination[nextPos] == -1 || costFromDestination[nextPos] > curCount + 1) {
+                q.push({nextPos, curCount + 1});
+                costFromDestination[nextPos] = curCount + 1;
+            } 
         }
     }
     
-    bfs(board);
-    if (answer == 2147000000) return -1;
+    for (int i = 0; i < sources.size(); i++) {
+        answer[i] = costFromDestination[sources[i]];
+    }
     
     return answer;
 }
