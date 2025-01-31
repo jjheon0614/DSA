@@ -37,9 +37,6 @@ vector<int> solution(int n, vector<vector<int>> roads, vector<int> sources, int 
         }
     }
     
-    for (int i = 0; i < sources.size(); i++) {
-        answer[i] = costFromDestination[sources[i]];
-    }
     
     return answer;
 }
