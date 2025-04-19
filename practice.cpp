@@ -1,42 +1,49 @@
-#include <string>
+#include <iostream>
 #include <vector>
-#include <queue>
 
 using namespace std;
 
-vector<int> edge[100001];
+vector<int> solution(int rows, int columns, vector<vector<int>> queries) {
+    vector<int> answer;
+    vector<vector<int>> graph(rows);
 
-vector<int> solution(int n, vector<vector<int>> roads, vector<int> sources, int destination) {
-    vector<int> answer(sources.size());
-    vector<int> costFromDestination(n + 1, -1);
-    
-    for (int i = 0; i < roads.size(); i++) {
-        int start = roads[i][0];
-        int dest = roads[i][1];
-        
-        edge[start].push_back(dest);
-        edge[dest].push_back(start);
-    }
-    
-    queue<pair<int, int>> q;
-    q.push({destination, 0});
-    costFromDestination[destination] = 0;
-    
-    while (!q.empty()) {
-        auto curPos = q.front().first;
-        auto curCount = q.front().second;
-        q.pop();
-        
-        for (int i = 0; i < edge[curPos].size(); i++) {
-            int nextPos = edge[curPos][i];
-            
-            if (costFromDestination[nextPos] == -1 || costFromDestination[nextPos] > curCount + 1) {
-                q.push({nextPos, curCount + 1});
-                costFromDestination[nextPos] = curCount + 1;
-            } 
+    int num = 1;
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < columns; j++){
+            graph[i].push_back(num);
+            num++;
         }
     }
+
+    for(int i = 0; i < queries.size(); i++){ 
+        int r1 = queries[i][0] - 1; 
+        int c1 = queries[i][1] - 1;
+        int r2 = queries[i][2] - 1;
+        int c2 = queries[i][3] - 1;
+        int temp = graph[r1][c1];
+        int mini = temp;
+        
+        for(int a = r1; a < r2; a++){ 
+            graph[a][c1] = graph[a + 1][c1];
+            mini = min(mini, graph[a][c1]);
+        }
+        for(int a = c1; a < c2; a++){
+            graph[r2][a] = graph[r2][a + 1];
+            mini = min(mini, graph[r2][a]);
+        }
+        for(int a = r2; a > r1; a--){
+            graph[a][c2] = graph[a - 1][c2];
+            mini = min(mini,graph[a][c2]);
+        }
+        for(int a = c2; a > c1; a--){
+            graph[r1][a] = graph[r1][a - 1];
+            mini = min(mini, graph[r1][a]);
+        }
     
-    
+        graph[r1][c1 + 1] = temp;
+
+        answer.push_back(mini);       
+    }
+
     return answer;
 }
