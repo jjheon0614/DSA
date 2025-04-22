@@ -8,7 +8,6 @@ int N;
 vector<long long> v;
 
 int main() {
-
     ios::sync_with_stdio(0);
     cin.tie(0);
 
@@ -25,22 +24,11 @@ int main() {
     sort(v_copy.begin(), v_copy.end());
     v_copy.erase(unique(v_copy.begin(), v_copy.end()), v_copy.end());
 
-    vector<int> result;
-
     for (int i = 0; i < N; i++) {
-        for (int j = 0; j < v_copy.size(); j++) {
-            if (v[i] == v_copy[j]) {
-                result.push_back(j);
-
-                break;
-            }
-        }
+        auto it = lower_bound(v_copy.begin(), v_copy.end(), v[i]);
+        cout << it - v_copy.begin() << ' ';
     }
-
-    for (int i = 0; i < N; i++) {
-        cout << result[i] << " ";
-    }
-
+    
     cout << "\n";
 
     return 0;
