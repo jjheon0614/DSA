@@ -1,6 +1,8 @@
+#include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <iostream>
+
+using namespace std;
 
 vector<int> solution(vector<string> enroll, vector<string> referral, vector<string> seller, vector<int> amount) {
    	
